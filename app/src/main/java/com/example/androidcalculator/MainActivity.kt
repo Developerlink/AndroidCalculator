@@ -8,8 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 
 class MainActivity : AppCompatActivity() {
 
-    var lastNumeric : Boolean = false
-    var lastDot: Boolean = false
+    private var lastNumeric : Boolean = false
+    private var lastDot: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -65,10 +65,69 @@ class MainActivity : AppCompatActivity() {
                     val splitValue = tvValue.split("-")
 
                     var first = splitValue[0]
+                    val second = splitValue[1]
+
+                    if(prefix.isNotEmpty()){
+                       first = prefix + first
+                    }
+
+                    var result = (first.toDouble() - second.toDouble()).toString()
+
+                    tvInput.text = removeZeroAfterDot(result)
+                } else if(tvValue.contains("+")){
+                    val splitValue = tvValue.split("+")
+
+                    var first = splitValue[0]
                     var second = splitValue[1]
 
-                    tvInput.text = (first.toDouble() - second.toDouble()).toString()
+                    if(prefix.isNotEmpty()){
+                        first = prefix + first
+                    }
+
+                    var result = (first.toDouble() + second.toDouble()).toString()
+
+                    tvInput.text = removeZeroAfterDot(result)
+                } else if(tvValue.contains("*")){
+                    val splitValue = tvValue.split("*")
+
+                    var first = splitValue[0]
+                    var second = splitValue[1]
+
+                    if(prefix.isNotEmpty()){
+                        first = prefix + first
+                    }
+
+                    var result = (first.toDouble() * second.toDouble()).toString()
+
+                    tvInput.text = removeZeroAfterDot(result)
+                } else if (tvValue.contains("*")){
+                    val splitValue = tvValue.split("*")
+
+                    var first = splitValue[0]
+                    var second = splitValue[1]
+
+                    if(prefix.isNotEmpty()){
+                        first = prefix + first
+                    }
+
+                    var result = (first.toDouble() * second.toDouble()).toString()
+
+                    tvInput.text = removeZeroAfterDot(result)
+                } else if (tvValue.contains("/")){
+                    val splitValue = tvValue.split("/")
+
+                    var first = splitValue[0]
+                    var second = splitValue[1]
+
+                    if(prefix.isNotEmpty()){
+                        first = prefix + first
+                    }
+
+                    var result = (first.toDouble() / second.toDouble()).toString()
+
+                    tvInput.text = removeZeroAfterDot(result)
                 }
+
             } catch (e: ArithmeticException){
                 e.printStackTrace()
             }
@@ -94,6 +153,13 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun removeZeroAfterDot(value: String) : String {
+        var result = value
+        if (result.takeLast(2) == ".0"){
+            result = result.dropLast(2)
+        }
+        return result
+    }
 
 
 }
