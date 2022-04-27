@@ -209,7 +209,7 @@
             android:layout_height="match_parent"
             android:layout_marginHorizontal="2dp"
             android:layout_weight="1"
-            android:onClick="onOperation"
+            android:onClick="onEqual"
             android:text="@string/button_equal" />
     </LinearLayout>
 

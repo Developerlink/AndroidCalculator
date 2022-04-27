@@ -17,8 +17,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSaveInstanceState(savedInstanceState: Bundle) {
+        var savedTvInput = findViewById<TextView>(R.id.tvInput).text.toString()
         // Save UI state changes to the savedInstanceState.
-        savedInstanceState.putString("MyString", "Welcome back to Android")
+        savedInstanceState.putString("MyString", savedTvInput)
+        savedInstanceState.putBoolean("lastNumeric", lastNumeric)
+        savedInstanceState.putBoolean("lastDot", lastDot)
         super.onSaveInstanceState(savedInstanceState)
     }
 
@@ -26,6 +29,10 @@ class MainActivity : AppCompatActivity() {
         super.onRestoreInstanceState(savedInstanceState)
         // Restore UI state from the savedInstanceState.
         val myString = savedInstanceState.getString("MyString")
+        var tvInput = findViewById<TextView>(R.id.tvInput)
+        tvInput.text = myString
+        lastNumeric = savedInstanceState.getBoolean("lastNumeric")
+        lastDot = savedInstanceState.getBoolean("lastDot")
     }
 
     fun onDigit(view: View){
